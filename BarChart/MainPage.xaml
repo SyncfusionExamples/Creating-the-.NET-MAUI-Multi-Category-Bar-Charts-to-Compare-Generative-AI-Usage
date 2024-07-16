@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BarChart.MainPage"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:model="clr-namespace:BarChart">
+
+    <ContentPage.BindingContext>
+        <model:ViewModel/>
+    </ContentPage.BindingContext>
+
+    <Border Stroke="Lightgray" StrokeThickness="1" Margin="{OnPlatform Default='5,15,5,5', iOS='25,0,20,25'}">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="10"/>
+        </Border.StrokeShape>
+
+        <Grid BackgroundColor="#011327">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Image Source="ai.png"
+                       Margin="{OnPlatform Default='10,10,10,0',MacCatalyst='10,0,10,15', Android='5,8,5,0',iOS='0,9,5,0'}"
+                       HeightRequest="{OnPlatform Android=45, WinUI=45, iOS= 45, MacCatalyst= 45}"  
+                       WidthRequest="{OnPlatform Android=30, WinUI=50, iOS=30, MacCatalyst= 50}"/>
+                <VerticalStackLayout>
+                    <Label Margin="{OnPlatform Default='0,10,0,14', Android='0,0,0,4',iOS='0,5,0,4'}" Text="Creating a .NET MAUI Bar Chart to Compare Generative AI Use for Creating Media vs Obtaining Information"
+                           TextColor="White"
+                           FontSize="{OnPlatform Android=15, WinUI=18, iOS=14, MacCatalyst=18}"
+                           FontFamily="TimeSpan"
+                           FontAttributes="Bold"/>
+                    <Label Text="The percentage of respondents who have attempted to use a generative AI tool (e.g. ChatGPT) for the following applications"
+                           TextColor="White"
+                           FontSize="{OnPlatform Android=12, WinUI=15, iOS=11, MacCatalyst=15}"
+                           FontFamily="TimeSpan"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+
+            <chart:SfCartesianChart Grid.Column="0" Grid.Row="1" Margin="{OnPlatform Default='25,25,25,25',iOS='-15,25,25,25'}" IsTransposed="True" >
+
+                <chart:SfCartesianChart.Resources>
+                    <DataTemplate x:Key="labelTemplate">
+                        <HorizontalStackLayout >
+                            <Label Text="{Binding Item.Percentage}" FontSize="{OnPlatform Default=15,Android=10,iOS=10}" FontAttributes="Bold" FontFamily="TimeSpan" TextColor="Black" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </chart:SfCartesianChart.Resources>
+
+                <chart:SfCartesianChart.Title>
+                    <HorizontalStackLayout Margin="{OnPlatform Default='0,0,0,20', iOS ='0,0,0,10', Android='0,0,0,10'}"  HorizontalOptions="Center">
+                        <Label Text="For getting information" FontFamily="TimeSpan" TextColor="White" FontAttributes="Bold" FontSize="{OnPlatform Android=15, WinUI=18, iOS=15, MacCatalyst=18}" HorizontalOptions="Center" ></Label>
+                    </HorizontalStackLayout>
+                </chart:SfCartesianChart.Title>
+
+                <chart:SfCartesianChart.XAxes>
+                    <chart:CategoryAxis IsInversed="True" ShowMajorGridLines="False">
+                        <chart:CategoryAxis.AxisLineStyle>
+                            <chart:ChartLineStyle Stroke="#011327"/>
+                        </chart:CategoryAxis.AxisLineStyle>
+                        <chart:CategoryAxis.MajorTickStyle>
+                            <chart:ChartAxisTickStyle Stroke="#011327"/>
+                        </chart:CategoryAxis.MajorTickStyle>
+                        <chart:CategoryAxis.LabelStyle>
+                            <chart:ChartAxisLabelStyle FontSize="{OnPlatform Default=17,Android=8,iOS=8}" TextColor="White" ></chart:ChartAxisLabelStyle>
+                        </chart:CategoryAxis.LabelStyle>
+                    </chart:CategoryAxis>
+                </chart:SfCartesianChart.XAxes>
+
+                <chart:SfCartesianChart.YAxes>
+                    <chart:NumericalAxis ShowMajorGridLines="False" IsVisible="False"  >
+                        <chart:NumericalAxis.AxisLineStyle>
+                            <chart:ChartLineStyle Stroke="#011327"/>
+                        </chart:NumericalAxis.AxisLineStyle>
+                        <chart:NumericalAxis.MajorTickStyle>
+                            <chart:ChartAxisTickStyle Stroke="#011327"/>
+                        </chart:NumericalAxis.MajorTickStyle>
+                    </chart:NumericalAxis>
+                </chart:SfCartesianChart.YAxes>
+
+                <chart:ColumnSeries ItemsSource="{Binding GettingInformationDetails}"
+                                    ShowDataLabels="True"
+                                    Fill="#a37bf8"
+                                    LabelTemplate="{StaticResource labelTemplate}"
+                                    XBindingPath="Purpose" 
+                                    YBindingPath="Percentage">
+                </chart:ColumnSeries>
+
+            </chart:SfCartesianChart>
+
+            <chart:SfCartesianChart Grid.Column="1" Grid.Row="1" Margin="25" IsTransposed="True" >
+
+            <chart:SfCartesianChart.Title>
+                <HorizontalStackLayout Margin="{OnPlatform Default='0,0,0,20',  iOS='0,0,0,10', Android='0,0,0,10'}" HorizontalOptions="Center" >
+                    <Label Text="For creating media" FontFamily="TimeSpan" TextColor="White" FontAttributes="Bold" FontSize="{OnPlatform Android=15, WinUI=18, iOS=15, MacCatalyst=18}" HorizontalOptions="Center" ></Label>
+                </HorizontalStackLayout>
+            </chart:SfCartesianChart.Title>
+
+                <chart:SfCartesianChart.Resources>
+                    <DataTemplate x:Key="labelTemplate">
+                        <HorizontalStackLayout >
+                            <Label Text="{Binding Item.Percentage}" FontSize="{OnPlatform Default=15,Android=10,iOS=10}" FontAttributes="Bold" FontFamily="TimeSpan" TextColor="Black" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </chart:SfCartesianChart.Resources>
+
+                <chart:SfCartesianChart.XAxes>
+                    <chart:CategoryAxis IsInversed="True" ShowMajorGridLines="False">
+                        <chart:CategoryAxis.AxisLineStyle>
+                            <chart:ChartLineStyle Stroke="#011327"/>
+                        </chart:CategoryAxis.AxisLineStyle>
+                        <chart:CategoryAxis.MajorTickStyle>
+                            <chart:ChartAxisTickStyle Stroke="#011327"/>
+                        </chart:CategoryAxis.MajorTickStyle>
+                        <chart:CategoryAxis.LabelStyle>
+                            <chart:ChartAxisLabelStyle FontSize="{OnPlatform Default=17,Android=8,iOS=8}" TextColor="White"></chart:ChartAxisLabelStyle>
+                        </chart:CategoryAxis.LabelStyle>
+                    </chart:CategoryAxis>
+                </chart:SfCartesianChart.XAxes>
+
+                <chart:SfCartesianChart.YAxes>
+                    <chart:NumericalAxis ShowMajorGridLines="False" IsVisible="False"/>
+                </chart:SfCartesianChart.YAxes>
+
+                <chart:ColumnSeries ItemsSource="{Binding CreatingMediaDetails}"
+                                    ShowDataLabels="True"
+                                    Fill="#bbece9"
+                                    LabelTemplate="{StaticResource labelTemplate}"
+                                    XBindingPath="Purpose" 
+                                    YBindingPath="Percentage">
+                </chart:ColumnSeries>
+
+            </chart:SfCartesianChart>
+        </Grid>
+    </Border>
+
+</ContentPage>
