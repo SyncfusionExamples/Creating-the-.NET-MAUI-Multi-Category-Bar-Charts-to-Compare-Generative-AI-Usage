@@ -10,7 +10,7 @@ namespace BarChart
     {
         public string Purpose { get; set; }
         public double Percentage { get; set; }
-        public Model(string purpose,double percentage)
+        public Model(string purpose, double percentage)
         {
             Purpose = purpose;
             Percentage = percentage;

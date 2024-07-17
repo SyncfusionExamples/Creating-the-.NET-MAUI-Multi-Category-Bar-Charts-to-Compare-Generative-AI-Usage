@@ -26,12 +26,9 @@
             </Grid.RowDefinitions>
 
             <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-                <Image Source="ai.png"
-                       Margin="{OnPlatform Default='10,10,10,0',MacCatalyst='10,0,10,15', Android='5,8,5,0',iOS='0,9,5,0'}"
-                       HeightRequest="{OnPlatform Android=45, WinUI=45, iOS= 45, MacCatalyst= 45}"  
-                       WidthRequest="{OnPlatform Android=30, WinUI=50, iOS=30, MacCatalyst= 50}"/>
+                <StackLayout Margin="{OnPlatform Default='10,14,10,5',Android='7,12,5,3',MacCatalyst='10,-10,10,5'}" WidthRequest="{OnPlatform Default=16,Android=10,iOS=10}" HeightRequest="{OnPlatform Default=48,Android=33,iOS=31}" BackgroundColor="#a37bf8"/>
                 <VerticalStackLayout>
-                    <Label Margin="{OnPlatform Default='0,10,0,14', Android='0,0,0,4',iOS='0,5,0,4'}" Text="Creating a .NET MAUI Bar Chart to Compare Generative AI Use for Creating Media vs Obtaining Information"
+                    <Label Margin="{OnPlatform Default='0,14,0,8', Android='0,0,0,4',iOS='0,5,0,2'}" Text="Comparing Generative AI Use for Creating Media vs Obtaining Information"
                            TextColor="White"
                            FontSize="{OnPlatform Android=15, WinUI=18, iOS=14, MacCatalyst=18}"
                            FontFamily="TimeSpan"
@@ -44,14 +41,6 @@
             </HorizontalStackLayout>
 
             <chart:SfCartesianChart Grid.Column="0" Grid.Row="1" Margin="{OnPlatform Default='25,25,25,25',iOS='-15,25,25,25'}" IsTransposed="True" >
-
-                <chart:SfCartesianChart.Resources>
-                    <DataTemplate x:Key="labelTemplate">
-                        <HorizontalStackLayout >
-                            <Label Text="{Binding Item.Percentage}" FontSize="{OnPlatform Default=15,Android=10,iOS=10}" FontAttributes="Bold" FontFamily="TimeSpan" TextColor="Black" />
-                        </HorizontalStackLayout>
-                    </DataTemplate>
-                </chart:SfCartesianChart.Resources>
 
                 <chart:SfCartesianChart.Title>
                     <HorizontalStackLayout Margin="{OnPlatform Default='0,0,0,20', iOS ='0,0,0,10', Android='0,0,0,10'}"  HorizontalOptions="Center">
@@ -87,9 +76,15 @@
                 <chart:ColumnSeries ItemsSource="{Binding GettingInformationDetails}"
                                     ShowDataLabels="True"
                                     Fill="#a37bf8"
-                                    LabelTemplate="{StaticResource labelTemplate}"
                                     XBindingPath="Purpose" 
                                     YBindingPath="Percentage">
+                    <chart:ColumnSeries.DataLabelSettings>
+                        <chart:CartesianDataLabelSettings UseSeriesPalette="False" LabelPlacement="Inner">
+                            <chart:CartesianDataLabelSettings.LabelStyle>
+                                <chart:ChartDataLabelStyle FontSize="{OnPlatform Default=15,Android=10,iOS=10}" FontAttributes="Bold" TextColor="Black" ></chart:ChartDataLabelStyle>
+                            </chart:CartesianDataLabelSettings.LabelStyle>
+                        </chart:CartesianDataLabelSettings>
+                    </chart:ColumnSeries.DataLabelSettings>
                 </chart:ColumnSeries>
 
             </chart:SfCartesianChart>
@@ -101,14 +96,6 @@
                     <Label Text="For creating media" FontFamily="TimeSpan" TextColor="White" FontAttributes="Bold" FontSize="{OnPlatform Android=15, WinUI=18, iOS=15, MacCatalyst=18}" HorizontalOptions="Center" ></Label>
                 </HorizontalStackLayout>
             </chart:SfCartesianChart.Title>
-
-                <chart:SfCartesianChart.Resources>
-                    <DataTemplate x:Key="labelTemplate">
-                        <HorizontalStackLayout >
-                            <Label Text="{Binding Item.Percentage}" FontSize="{OnPlatform Default=15,Android=10,iOS=10}" FontAttributes="Bold" FontFamily="TimeSpan" TextColor="Black" />
-                        </HorizontalStackLayout>
-                    </DataTemplate>
-                </chart:SfCartesianChart.Resources>
 
                 <chart:SfCartesianChart.XAxes>
                     <chart:CategoryAxis IsInversed="True" ShowMajorGridLines="False">
@@ -131,9 +118,15 @@
                 <chart:ColumnSeries ItemsSource="{Binding CreatingMediaDetails}"
                                     ShowDataLabels="True"
                                     Fill="#bbece9"
-                                    LabelTemplate="{StaticResource labelTemplate}"
                                     XBindingPath="Purpose" 
                                     YBindingPath="Percentage">
+                    <chart:ColumnSeries.DataLabelSettings>
+                        <chart:CartesianDataLabelSettings UseSeriesPalette="False" LabelPlacement="Inner">
+                            <chart:CartesianDataLabelSettings.LabelStyle>
+                                <chart:ChartDataLabelStyle FontSize="{OnPlatform Default=15,Android=10,iOS=10}" FontAttributes="Bold" TextColor="Black" ></chart:ChartDataLabelStyle>
+                            </chart:CartesianDataLabelSettings.LabelStyle>
+                        </chart:CartesianDataLabelSettings>
+                    </chart:ColumnSeries.DataLabelSettings>
                 </chart:ColumnSeries>
 
             </chart:SfCartesianChart>
